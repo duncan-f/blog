@@ -26,9 +26,9 @@ class PostController extends Controller
     {
         $query = request('q');
         $posts = Post::where('title', 'like', "%$query%")
-                        ->orWhere('body', 'like', "%$query%")
-                        ->orderBy('created_at', 'desc')
-                        ->paginate(5);
+                    ->orWhere('body', 'like', "%$query%")
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(5);
 
         return view('posts.index', compact('posts'));
     }

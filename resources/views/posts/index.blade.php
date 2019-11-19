@@ -12,7 +12,7 @@
 @forelse($posts as $post)
     <div class="blog-post mb-4">
         <h2 class="blog-post-title">{{ $post->title }}</h2>
-        <p class="blog-post-meta">{{ __('Published') }} {{ $post->created_at->diffForHumans() }}, by <a href="#">Mark</a></p>
+        <p class="blog-post-meta">{{ __('Published') }} {{ $post->created_at->diffForHumans() }}, by <a href="#">{{ $post->user->name }}</a></p>
 
         <p>{{ str_limit($post->body, 350) }}</p>
         <a href="{{ route('posts.show', $post) }}" class="btn btn-outline-secondary">{{ __('Read more') }}</a>
