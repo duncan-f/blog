@@ -9,17 +9,12 @@ class Post extends Model
     protected $fillable = [
         'title',
         'slug',
+        'user_id',
         'body'
     ];
 
-    public function createSlug()
-    {
-        
-    }
-
     public function user()
     {
-        //return $this->belongsToMany('App\User', 'post_users', 'post_id', 'user_id');
         return $this->belongsTo('App\User');
     }
 }

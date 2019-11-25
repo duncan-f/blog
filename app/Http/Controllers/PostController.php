@@ -52,10 +52,13 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'title'     =>  'required|min:5',
-            'slug'      =>  'required|min:5|unique:posts,slug',
-            'body'      =>  'required',
+            'title'     =>  'required|min:3',
+            'slug'      =>  'required|min:3|unique:posts,slug',
+            'body'      =>  'required|min:3',
         ];
+
+        $request['slug'] = str_slug($request->title, '-');
+        $request['user_id'] = \Auth::user()->id;
 
         $this->validate($request, $rules);
 
@@ -101,9 +104,9 @@ class PostController extends Controller
             'body'      =>  'required',
         ];
 
-        $this->validate($request, $rules);
+        $request['slug'] = str_slug($request->title, '-');
 
-        //$post->slug = str_slug($request->slug);
+        $this->validate($request, $rules);
 
         $post->update($request->all());
 

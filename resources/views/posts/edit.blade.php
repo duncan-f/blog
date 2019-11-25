@@ -15,11 +15,6 @@
     </div>
 
     <div class="form-group">
-        {{ Form::label('slug', __('Slug')) }}
-        {{ Form::text('slug', $post->slug, ['class' => 'form-control', 'placeholder' => __('Slug')]) }}
-    </div>
-
-    <div class="form-group">
         {{ Form::label('body', __('Post')) }}
         {{ Form::textarea('body', $post->body, ['class' => 'form-control', 'placeholder' => __('Type your post.')]) }}
     </div>
