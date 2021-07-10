@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -14,7 +15,7 @@ class PostController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except('index');
+        $this->middleware('auth')->except('index', 'show');
     }
 
     /**
@@ -53,16 +54,14 @@ class PostController extends Controller
     {
         $rules = [
             'title'     =>  'required|min:3',
-            'slug'      =>  'required|min:3|unique:posts,slug',
             'body'      =>  'required|min:3',
         ];
 
-        $request['slug'] = str_slug($request->title, '-');
-        $request['user_id'] = \Auth::user()->id;
+        $request['slug'] = Str::slug($request->title, '-');
 
         $this->validate($request, $rules);
 
-        $post = Post::create($request->all());
+        $post = auth()->user()->posts()->create($request->all());
 
         return redirect()->route('posts.show', $post)->with('success', __('Your post has been created successfully.'));
     }
@@ -86,6 +85,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+		$this->authorize('update', $post);
+
         return view('posts.edit', compact('post'));
     }
 
@@ -98,19 +99,19 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+		$this->authorize('update', $post);
         $rules = [
-            'title'     =>  'required|min:5',
-            'slug'      =>  'required|min:5',
+            'title'     =>  'required|min:3',
             'body'      =>  'required',
         ];
 
-        $request['slug'] = str_slug($request->title, '-');
+        $request['slug'] = Str::slug($request->title, '-');
 
         $this->validate($request, $rules);
 
         $post->update($request->all());
 
-        return redirect()->route('posts.show', $post->id)->with('success', __('Your post has been updated successfully.'));
+        return redirect()->route('posts.show', $post)->with('success', __('Your post has been updated successfully.'));
     }
 
     /**
@@ -121,6 +122,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+		$this->authorize('delete', $post);
+
         $post = Post::findOrFail($post->id);
         $post->delete();
 

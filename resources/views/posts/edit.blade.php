@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', "| $post->title")
+@section('title', "$post->title")
 
 @section('content')
 <div class="col-md-8 offset-md-2">

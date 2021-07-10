@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -13,7 +14,8 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('guest');
+        //$this->middleware('verified');
     }
 
     /**
@@ -23,6 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+		$posts = Post::orderBy('id', 'DESC')->take(5)->get();
+		$last = Post::latest()->first();
+        return view('home', compact('posts', 'last'));
     }
 }

@@ -1,5 +1,6 @@
 @if ($errors->any())
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
+		<strong>Whoops!</strong> Something went wrong.
         <ul>
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>

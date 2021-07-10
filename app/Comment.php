@@ -4,19 +4,19 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Comment extends Model
 {
 	protected $guarded = [];
 
-	public function getRouteKeyName()
+	public function commentable()
 	{
-		return 'slug';
+		return $this->morphTo();
 	}
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+	public function user()
+	{
+		return $this->belongsTo(User::class);
+	}
 
 	public function comments()
 	{

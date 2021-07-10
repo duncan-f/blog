@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', __('Reset Password'))
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -8,7 +10,7 @@
                 <div class="card-header">{{ __('Reset Password') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('password.update') }}">
+                    <form method="POST" action="{{ route('password.update') }}" novalidate>
                         @csrf
 
                         <input type="hidden" name="token" value="{{ $token }}">
