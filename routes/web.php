@@ -13,10 +13,11 @@
 
 Auth::routes(['verify' => true]);
 
+Route::resource('posts', 'PostController');
+
 Route::middleware('verified')->group(function() {
 	Route::get('/', 'HomeController@index')->name('home')->withoutMiddleware(['verified']);
 	Route::resource('categories', 'CategoryController');
-	Route::resource('posts', 'PostController');
 	Route::resource('comments', 'CommentController', ['only' => ['store', 'replyStore', 'edit', 'destroy']]);
 	Route::post('/reply/store', 'CommentController@replyStore')->name('reply.add');
 });

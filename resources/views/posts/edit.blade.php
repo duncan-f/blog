@@ -6,7 +6,7 @@
 <div class="col-md-8 offset-md-2">
     <h4 class="display-4">{{ __('Edit Post') }} <small>({{ $post->title }})</small></h4>
 
-    {{ Form::open(['route' => ['posts.update', $post->id]]) }}
+    {{ Form::open(['route' => ['posts.update', $post]]) }}
     @csrf
     @method('PATCH')
     <div class="form-group">
