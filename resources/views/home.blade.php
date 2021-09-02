@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
-@section('title', __('Home'))
-
+@section('title', config('app.name', 'Laravel'))
 @section('home')
+@include('partials.nav-categories')
 @if($last)
   <div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
     <div class="col-md-6 px-0">
@@ -12,7 +12,9 @@
     </div>
   </div>
 @endif
+@if($categories->count() > 0)
   <div class="row mb-2">
+	<!-- First card -->
     <div class="col-md-6">
       <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
@@ -27,6 +29,8 @@
         </div>
       </div>
     </div>
+	<!-- end of First card -->
+	<!-- Second card -->
     <div class="col-md-6">
       <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
@@ -41,7 +45,9 @@
         </div>
       </div>
     </div>
+	<!-- end of Second card -->
   </div>
+@endif
 </div>
 
 @endsection
@@ -62,7 +68,7 @@
 		<a href="{{ route('posts.show', $post) }}" class="streched-link">Continue reading...</a>
 	  </div>
 	@empty
-		<h3 class="display-4">Website empty try to put some posts.</h3>
+		<h3 class="display-4">Website's empty try to put some posts.</h3>
 	@endforelse
     </div><!-- /.blog-main -->
 

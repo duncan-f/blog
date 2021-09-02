@@ -21,7 +21,9 @@ class posts extends Seeder
                 'title' => $faker->sentence,
                 'slug' => $faker->slug,
                 'body' => $faker->realText(2000),
-                'created_at' => $faker->dateTime()
+				'user_id' => 1,
+                'created_at' => $faker->dateTime(),
+                'updated_at' => $faker->dateTime()
             ]);
         }
 

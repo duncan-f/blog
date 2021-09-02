@@ -28,7 +28,7 @@ class CommentController extends Controller
 		$post = Post::find($request->post_id);
 		$post->comments()->save($comment);
 
-		return redirect()->route('posts.show', $request->post_id)->with('success', __('Comment added successfully.'));
+		return back()->with('success', __('Comment added successfully.'));
 	}
 
 	public function replyStore(Request $request)
@@ -46,7 +46,7 @@ class CommentController extends Controller
 		$comment = Comment::find($request->comment_id);
 		$comment->comments()->save($reply);
 
-		return redirect()->back()->with('success', __('Replied successfully.'));
+		return back()->with('success', __('Replied successfully.'));
 	}
 
 	public function edit()

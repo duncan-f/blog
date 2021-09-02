@@ -31,7 +31,7 @@
 	<h3 class="display-5 mb-4">{{ __($post->comments->count() . ' Comments') }}</h3>
 	<form action="{{ route('comments.store') }}" method="POST">
 		@csrf
-		<input type="hidden" name="post_id" value="{{ $post }}">
+		<input type="hidden" name="post_id" value="{{ $post->id }}">
 		<div class="form-group">
 			<textarea name="comment" class="form-control @error('comment') is-invalid @enderror" placeholder="Type your comment"></textarea>
 		@error('comment')
@@ -50,14 +50,14 @@
 			{{ Str::limit($comment->comment, 150) }}
 			@auth
 			<div class="mb-2">
-			  <a data-toggle="collapse" href="#collapse{{ $comment }}" role="button" aria-expanded="false" aria-controls="collapse{{ $comment }}">
+			  <a data-toggle="collapse" href="#collapse{{ $comment->id }}" role="button" aria-expanded="false" aria-controls="collapse{{ $comment->id }}">
 	{{ __('Reply') }}
 			  </a>
 			</div>
-			<div class="collapse" id="collapse{{ $comment }}">
+			<div class="collapse" id="collapse{{ $comment->id }}">
 	<form action="{{ route('reply.add') }}" method="POST" class="ml-5">
 		@csrf
-		<input type="hidden" name="comment_id" value="{{ $comment }}">
+		<input type="hidden" name="comment_id" value="{{ $comment->id }}">
 		<div class="form-group">
 			<textarea name="reply" class="form-control @error('reply') is-invalid @enderror" placeholder="Type your comment"></textarea>
 		@error('reply')

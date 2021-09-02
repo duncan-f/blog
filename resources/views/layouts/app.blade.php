@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="author" content="dunCan">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title') &bull; {{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('title')</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -17,7 +17,6 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/blog.css') }}">
 
     @yield('stylesheets')
@@ -63,6 +62,10 @@
           @endif
         @else
           <a class="p-2 text-muted" href="{{ route('posts.create') }}">{{ __('New Post') }}</a>
+		  @can('hasRole')
+          <a class="p-2 text-muted" href="#">{{ __('Admin') }}</a>
+		  @endcan
+		  <img width="16" height="16" class="rounded img-fluid" src="https://w7.pngwing.com/pngs/471/115/png-transparent-red-hat-enterprise-linux-7-linux-distribution-linux-hat-fictional-character-silhouette-thumbnail.png" />
           <a class="p-2 text-muted" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
 													 document.getElementById('logout-form').submit();">
@@ -75,22 +78,7 @@
     </div>
   </header>
 
-  <div class="nav-scroller py-1 mb-2">
-    <nav class="nav d-flex justify-content-between">
-      <a class="p-2 text-muted" href="#">World</a>
-      <a class="p-2 text-muted" href="#">U.S.</a>
-      <a class="p-2 text-muted" href="#">Technology</a>
-      <a class="p-2 text-muted" href="#">Design</a>
-      <a class="p-2 text-muted" href="#">Culture</a>
-      <a class="p-2 text-muted" href="#">Business</a>
-      <a class="p-2 text-muted" href="#">Politics</a>
-      <a class="p-2 text-muted" href="#">Opinion</a>
-      <a class="p-2 text-muted" href="#">Science</a>
-      <a class="p-2 text-muted" href="#">Health</a>
-      <a class="p-2 text-muted" href="#">Style</a>
-      <a class="p-2 text-muted" href="#">Travel</a>
-    </nav>
-  </div>
+  <!-- nav for categories goes here !! -->
   @if (session('status'))
   <div class="alert alert-success" role="alert">
 	{{ session('status') }}
