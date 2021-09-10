@@ -70,8 +70,8 @@
 			<button type="submit" class="btn btn-outline-secondary">{{ __('Reply') }}</button>
 		</div>
 	</form>
-		@endauth
 			</div>
+		@endauth
 			@foreach($comment->comments as $reply)
 				<div class="ml-5">
 					<strong>{{ $reply->user->name }}</strong> <small class="text-muted">{{ $reply->created_at->diffForHumans() }}</small>
